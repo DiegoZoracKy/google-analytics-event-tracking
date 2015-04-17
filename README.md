@@ -8,7 +8,7 @@ Define the elements and events to be tracked, along with its respective Google A
 
 ## Usage
 
-This is an basic example of how you would setup the plugin:
+This is an basic example of how you can setup the plugin:
 
 ```javascript
 $.googleAnalyticsEventTracking({
