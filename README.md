@@ -61,3 +61,4 @@ $.googleAnalyticsEventTracking({
 ```
 Properties of **gaEventData** can be the real Google Analytics event data names ('eventCategory', 'eventAction', 'eventLabel', 'eventValue', 'nonInteraction')
 
+**It depends on jQuery**
