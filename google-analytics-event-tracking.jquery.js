@@ -25,27 +25,34 @@
                 gaEvent.events = [gaEvent.events];
 
             gaEvent.events.forEach(function(trackEvent) {
-                var gaEventData = {};
+                var gaEventData = {hitType: 'event'};
+
                 for (var eventLabel in trackEvent.gaEventData) {
-                    gaEventData[gaEventDataTranslations[eventLabel.toLowerCase()] || eventLabel] = trackEvent.gaEventData[eventLabel];
+                    var gaEventKey = gaEventDataTranslations[eventLabel.toLowerCase()] || eventLabel;
+
+                    if(trackEvent.gaEventData[eventLabel].constructor == Function )
+                        gaEventData[gaEventKey] = trackEvent.gaEventData[eventLabel]($(gaEvent.targetSelector), $(gaEvent.delegateTo));
+                    else
+                        gaEventData[gaEventKey] = trackEvent.gaEventData[eventLabel];
                 }
 
-                gaEventData.hitType = 'event';
                 applyEventHandler(gaEvent.delegateTo, trackEvent.eventType, gaEvent.targetSelector, gaEventData);
             });
         });
 
-
         function applyEventHandler(delegateTo, eventType, targetSelector, gaEventData) {
             eventType = eventType + '.gaEvent';
-            var gaSendFunction = function() {
-                ga('send', gaEventData);
-            };
 
             if (delegateTo)
-                $(delegateTo).on(eventType, targetSelector, gaSendFunction);
+                $(delegateTo).on(eventType, targetSelector, gaSendFunction(gaEventData));
             else
-                $(targetSelector).on(eventType, gaSendFunction);
+                $(targetSelector).on(eventType, gaSendFunction(gaEventData));
+        }
+
+        function gaSendFunction(gaEventData) {
+            return function(){
+                ga('send', gaEventData);
+            };
         }
     };
 

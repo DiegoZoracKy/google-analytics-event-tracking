@@ -26,7 +26,9 @@ $.googleAnalyticsEventTracking({
 });
 ```
 
-And here is an example defining multiple elements and events to be tracked, showing its capability to define more than one event for the same element.
+And here is an example defining multiple elements and events to be tracked, showing its capability to:
+- Define more than one event per element.
+- Use a function to define the value of a property. The function will expose the jQuery elements **$targetSelector** and **$delegateTo**, in case you need to extract data from the element to be passed on as a value (e.g. $element.text() as a event label).
 
 ```javascript
 $.googleAnalyticsEventTracking({
@@ -46,7 +48,9 @@ $.googleAnalyticsEventTracking({
         gaEventData: {
             category: 'Event category',
             action: 'click',
-            label: 'Event Label'
+            label: function($target) {
+                return $target.text();
+            }
         }
     }, {
         eventType: 'mouseenter',
