@@ -1,6 +1,6 @@
 # Google Analytics Event Tracking
 
-**$.googleAnalyticsEventTracking** is meant to provide an easy, and lightweight (**.min < 1kb**), way to do exactly what its name says.
+**$.googleAnalyticsEventTracking** is a jQuery plugin meant to provide an easy, and lightweight (**.min < 1kb**), way to do exactly what its name says.
 
 ## The goal
 
