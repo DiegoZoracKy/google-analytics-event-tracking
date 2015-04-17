@@ -1,6 +1,6 @@
 # Google Analytics Event Tracking
 
-**$.googleAnalyticsEventTracking** is meant to provide an easy, and well structured way, to do exactly what its name says.
+**$.googleAnalyticsEventTracking** is meant to provide an easy way to do exactly what its name says.
 
 ## The goal
 
