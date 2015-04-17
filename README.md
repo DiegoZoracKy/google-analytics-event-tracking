@@ -1,6 +1,6 @@
 # Google Analytics Event Tracking
 
-** $.googleAnalyticsEventTracking ** is meant to provide an easy, and well structured way, to do exactly what its name says.
+**$.googleAnalyticsEventTracking** is meant to provide an easy, and well structured way, to do exactly what its name says.
 
 ## The goal
 
@@ -59,5 +59,5 @@ $.googleAnalyticsEventTracking({
     }]
 });
 ```
-** * ** Properties of **gaEventData** can be the real Google Analytics event data names ('eventCategory', 'eventAction', 'eventLabel', 'eventValue', 'nonInteraction')
+***** Properties of **gaEventData** can be the real Google Analytics event data names ('eventCategory', 'eventAction', 'eventLabel', 'eventValue', 'nonInteraction')
 
