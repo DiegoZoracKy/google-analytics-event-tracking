@@ -31,14 +31,14 @@ And here is an example defining multiple elements and events to be tracked, show
 ```javascript
 $.googleAnalyticsEventTracking({
     targetSelector: '#formId',
-    events: [{
+    events: {
         eventType: 'submit',
         gaEventData: {
             category: 'form',
             action: 'submit',
             label: 'Newsletter'
         }
-    }]
+    }
 },{
     targetSelector: '.target',
     events: [{
