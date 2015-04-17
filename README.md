@@ -18,9 +18,9 @@ $.googleAnalyticsEventTracking({
     events: {
         eventType: 'click',
         gaEventData: {
-            'category': 'Event Category',
-            'action': 'Event Action',
-            'label': 'Event Label'
+            category: 'Event Category',
+            action: 'Event Action',
+            label: 'Event Label'
         }
     }
 });
@@ -34,9 +34,9 @@ $.googleAnalyticsEventTracking({
     events: [{
         eventType: 'submit',
         gaEventData: {
-            'category': 'form',
-            'action': 'submit',
-            'label': 'Newsletter'
+            category: 'form',
+            action: 'submit',
+            label: 'Newsletter'
         }
     }]
 },{
@@ -44,17 +44,17 @@ $.googleAnalyticsEventTracking({
     events: [{
         eventType: 'click',
         gaEventData: {
-            'category': 'Event category',
-            'action': 'click',
-            'label': 'Event Label'
+            category: 'Event category',
+            action: 'click',
+            label: 'Event Label'
         }
     }, {
         eventType: 'mouseenter',
         gaEventData: {
-            'category': 'Event category',
-            'action': 'open',
-            'label': 'Event Label',
-            'nonInteraction': 1
+            category: 'Event category',
+            action: 'open',
+            label: 'Event Label',
+            nonInteraction: 1
         }
     }]
 });
