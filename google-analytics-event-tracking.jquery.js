@@ -7,6 +7,8 @@
 (function() {
     'use strict';
 
+    var registeredEvents = [];
+
     $.googleAnalyticsEventTracking = function(gaEvents) {
         var gaEventDataTranslations = {
             'category': 'eventCategory',
@@ -20,6 +22,7 @@
             gaEvents = Array.prototype.slice.call(arguments);
 
         gaEvents.forEach(function(gaEvent) {
+            registeredEvents.push(gaEvent);
 
             if (gaEvent.events.constructor != Array)
                 gaEvent.events = [gaEvent.events];
@@ -39,6 +42,12 @@
                 applyEventHandler(gaEvent.delegateTo, trackEvent.eventType, gaEvent.targetSelector, gaEventData);
             });
         });
+
+        $.googleAnalyticsEventTracking.getRegisteredEvents = getRegisteredEvents;
+
+        function getRegisteredEvents(){
+            return registeredEvents;
+        }
 
         function applyEventHandler(delegateTo, eventType, targetSelector, gaEventData) {
             eventType = eventType + '.gaEvent';

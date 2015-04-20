@@ -65,4 +65,10 @@ $.googleAnalyticsEventTracking({
 ```
 Properties of **gaEventData** can be the real Google Analytics event data names ('eventCategory', 'eventAction', 'eventLabel', 'eventValue', 'nonInteraction')
 
+### Get Registered Events
+
+You can check which events were registered by calling: $.googleAnalyticsEventTracking.getRegisteredEvents();
+
+In case you have split the registration through multiple files or states and want to check fast what is happening. Just call it on browser console.
+
 **It depends on jQuery**
