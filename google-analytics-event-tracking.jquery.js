@@ -43,12 +43,6 @@
             });
         });
 
-        $.googleAnalyticsEventTracking.getRegisteredEvents = getRegisteredEvents;
-
-        function getRegisteredEvents(){
-            return registeredEvents;
-        }
-
         function applyEventHandler(delegateTo, eventType, targetSelector, gaEventData) {
             eventType = eventType + '.gaEvent';
 
@@ -64,5 +58,11 @@
             };
         }
     };
+
+    $.googleAnalyticsEventTracking.getRegisteredEvents = getRegisteredEvents;
+
+    function getRegisteredEvents(){
+        return registeredEvents;
+    }
 
 })(jQuery);
