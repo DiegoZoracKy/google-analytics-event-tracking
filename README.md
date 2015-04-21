@@ -65,9 +65,17 @@ $.googleAnalyticsEventTracking({
 ```
 Properties of **gaEventData** can be the real Google Analytics event data names ('eventCategory', 'eventAction', 'eventLabel', 'eventValue', 'nonInteraction')
 
+### Debug Mode
+
+To test your application without send data to Google Analytics, execute:
+$.googleAnalyticsEventTracking.**setDebugMode**(true);
+
+In this mode, all data that will be send to Google Analytics will be logged on console. To disable the debug mode:
+$.googleAnalyticsEventTracking.**setDebugMode**(false);
+
 ### Get Registered Events
 
-You can check which events were registered by calling: $.googleAnalyticsEventTracking.getRegisteredEvents();
+You can check which events were registered by calling: $.googleAnalyticsEventTracking.**getRegisteredEvents**();
 
 In case you have split the registration through multiple files or states and want to check fast what is happening. Just call it on browser console.
 

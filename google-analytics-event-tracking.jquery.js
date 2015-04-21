@@ -7,9 +7,9 @@
 (function() {
     'use strict';
 
-    var registeredEvents = [];
-
     $.googleAnalyticsEventTracking = function(gaEvents) {
+        var debugMode = false;
+        var registeredEvents = [];
         var gaEventDataTranslations = {
             'category': 'eventCategory',
             'action': 'eventAction',
@@ -28,41 +28,37 @@
                 gaEvent.events = [gaEvent.events];
 
             gaEvent.events.forEach(function(trackEvent) {
-                var gaEventData = {hitType: 'event'};
-
-                for (var eventLabel in trackEvent.gaEventData) {
-                    var gaEventKey = gaEventDataTranslations[eventLabel.toLowerCase()] || eventLabel;
-
-                    if(trackEvent.gaEventData[eventLabel].constructor == Function )
-                        gaEventData[gaEventKey] = trackEvent.gaEventData[eventLabel]($(gaEvent.targetSelector), $(gaEvent.delegateTo));
-                    else
-                        gaEventData[gaEventKey] = trackEvent.gaEventData[eventLabel];
-                }
-
-                applyEventHandler(gaEvent.delegateTo, trackEvent.eventType, gaEvent.targetSelector, gaEventData);
+                if (gaEvent.delegateTo)
+                    $(gaEvent.delegateTo).on(trackEvent.eventType, gaEvent.targetSelector, gaSendFunction(trackEvent.gaEventData, gaEvent.delegateTo));
+                else
+                    $(gaEvent.targetSelector).on(trackEvent.eventType, gaSendFunction(trackEvent.gaEventData, gaEvent.delegateTo));
             });
         });
 
-        function applyEventHandler(delegateTo, eventType, targetSelector, gaEventData) {
-            eventType = eventType + '.gaEvent';
+        function gaSendFunction(gaEventData, delegateTo) {
+            return function(e){
+                var eventDataToSend = {hitType: 'event'};
+                for (var key in gaEventData){
+                    var eventKey = gaEventDataTranslations[key.toLowerCase()] || key;
+                    eventDataToSend[eventKey] = gaEventData[key];
+                    if(gaEventData[key].constructor == Function)
+                        eventDataToSend[eventKey] = gaEventData[key]($(e.currentTarget), $(delegateTo));
+                }
 
-            if (delegateTo)
-                $(delegateTo).on(eventType, targetSelector, gaSendFunction(gaEventData));
-            else
-                $(targetSelector).on(eventType, gaSendFunction(gaEventData));
-        }
-
-        function gaSendFunction(gaEventData) {
-            return function(){
-                ga('send', gaEventData);
+                if(debugMode)
+                    console.log('send', eventDataToSend);
+                else
+                    ga('send', eventDataToSend);
             };
         }
+
+        $.googleAnalyticsEventTracking.setDebugMode = function setDebugMode(mode){
+            debugMode = mode;
+        };
+
+        $.googleAnalyticsEventTracking.getRegisteredEvents = function getRegisteredEvents(){
+            return registeredEvents;
+        };
     };
-
-    $.googleAnalyticsEventTracking.getRegisteredEvents = getRegisteredEvents;
-
-    function getRegisteredEvents(){
-        return registeredEvents;
-    }
 
 })(jQuery);
