@@ -29,6 +29,7 @@ $.googleAnalyticsEventTracking({
 And here is an example defining multiple elements and events to be tracked, showing its capability to:
 - Define more than one event per element.
 - Use a function to define the value of a property. The function will expose the jQuery elements **$targetSelector** and **$delegateTo**, in case you need to extract data from the element to be passed on as a value (e.g. $element.text() as a event label).
+- Express a conditional statement, per event, to send data for google analytics
 
 ```javascript
 $.googleAnalyticsEventTracking({
@@ -39,6 +40,9 @@ $.googleAnalyticsEventTracking({
             category: 'form',
             action: 'submit',
             label: 'Newsletter'
+        },
+        conditional: function($target, $delegateTo){
+            return $('body').is('.someSpecificLandingPage');
         }
     }
 },{
