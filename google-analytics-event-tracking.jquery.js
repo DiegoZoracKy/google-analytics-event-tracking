@@ -7,17 +7,17 @@
 (function() {
     'use strict';
 
-    $.googleAnalyticsEventTracking = function(gaEvents) {
-        var debugMode = false;
-        var registeredEvents = [];
-        var gaEventDataTranslations = {
-            'category': 'eventCategory',
-            'action': 'eventAction',
-            'label': 'eventLabel',
-            'value': 'eventValue',
-            'nonInteraction': 'nonInteraction'
-        };
+    var debugMode = false;
+    var registeredEvents = [];
+    var gaEventDataTranslations = {
+        'category': 'eventCategory',
+        'action': 'eventAction',
+        'label': 'eventLabel',
+        'value': 'eventValue',
+        'nonInteraction': 'nonInteraction'
+    };
 
+    $.googleAnalyticsEventTracking = function(gaEvents) {
         if (gaEvents.constructor != Array)
             gaEvents = Array.prototype.slice.call(arguments);
 
@@ -34,34 +34,34 @@
                     $(gaEvent.targetSelector).on(trackEvent.eventType, gaSendFunction(trackEvent, gaEvent));
             });
         });
-
-        function gaSendFunction(trackEvent, gaEvent) {
-            return function(e){
-                if(trackEvent.condition && !trackEvent.condition($(e.currentTarget), $(gaEvent.delegateTo)))
-                    return;
-
-                var eventDataToSend = {hitType: 'event'};
-                for (var key in trackEvent.gaEventData){
-                    var eventKey = gaEventDataTranslations[key.toLowerCase()] || key;
-                    eventDataToSend[eventKey] = trackEvent.gaEventData[key];
-                    if(trackEvent.gaEventData[key].constructor == Function)
-                        eventDataToSend[eventKey] = trackEvent.gaEventData[key]($(e.currentTarget), $(gaEvent.delegateTo));
-                }
-
-                if(debugMode)
-                    console.log('send', eventDataToSend);
-                else
-                    ga('send', eventDataToSend);
-            };
-        }
-
-        $.googleAnalyticsEventTracking.setDebugMode = function setDebugMode(mode){
-            debugMode = mode;
-        };
-
-        $.googleAnalyticsEventTracking.getRegisteredEvents = function getRegisteredEvents(){
-            return registeredEvents;
-        };
     };
+
+    $.googleAnalyticsEventTracking.setDebugMode = function setDebugMode(mode){
+        debugMode = mode;
+    };
+
+    $.googleAnalyticsEventTracking.getRegisteredEvents = function getRegisteredEvents(){
+        return registeredEvents;
+    };
+
+    function gaSendFunction(trackEvent, gaEvent) {
+        return function(e){
+            if(trackEvent.condition && !trackEvent.condition($(e.currentTarget), $(gaEvent.delegateTo)))
+                return;
+
+            var eventDataToSend = {hitType: 'event'};
+            for (var key in trackEvent.gaEventData){
+                var eventKey = gaEventDataTranslations[key.toLowerCase()] || key;
+                eventDataToSend[eventKey] = trackEvent.gaEventData[key];
+                if(trackEvent.gaEventData[key].constructor == Function)
+                    eventDataToSend[eventKey] = trackEvent.gaEventData[key]($(e.currentTarget), $(gaEvent.delegateTo));
+            }
+
+            if(debugMode)
+                console.log('send', eventDataToSend);
+            else
+                ga('send', eventDataToSend);
+        };
+    }
 
 })(jQuery);
