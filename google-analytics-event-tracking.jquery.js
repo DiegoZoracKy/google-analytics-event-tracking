@@ -13,8 +13,7 @@
         'category': 'eventCategory',
         'action': 'eventAction',
         'label': 'eventLabel',
-        'value': 'eventValue',
-        'nonInteraction': 'nonInteraction'
+        'value': 'eventValue'
     };
 
     $.googleAnalyticsEventTracking = function(gaEvents) {
@@ -52,9 +51,9 @@
             var eventDataToSend = {hitType: 'event'};
             for (var key in trackEvent.gaEventData){
                 var eventKey = gaEventDataTranslations[key.toLowerCase()] || key;
-                eventDataToSend[eventKey] = trackEvent.gaEventData[key];
-                if(trackEvent.gaEventData[key].constructor == Function)
-                    eventDataToSend[eventKey] = trackEvent.gaEventData[key]($(e.currentTarget), $(gaEvent.delegateTo));
+                eventDataToSend[eventKey] = (trackEvent.gaEventData[key].constructor == Function)?
+                trackEvent.gaEventData[key]($(e.currentTarget), $(gaEvent.delegateTo)):
+                trackEvent.gaEventData[key];
             }
 
             if(debugMode)
