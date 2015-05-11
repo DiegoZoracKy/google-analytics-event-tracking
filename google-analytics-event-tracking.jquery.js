@@ -59,7 +59,8 @@
             if(debugMode)
                 console.log('send', eventDataToSend);
             else
-                ga('send', eventDataToSend);
+                if(ga)
+                    ga('send', eventDataToSend);
         };
     }
 
