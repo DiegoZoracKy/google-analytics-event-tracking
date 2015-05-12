@@ -1,0 +1,22 @@
+{
+  "name": "google-analytics-event-tracking.jquery.js",
+  "version": "1.0.0",
+  "main": "google-analytics-event-tracking.jquery.js",
+  "moduleType": ["globals"],
+  "authors": {
+    "name": "Diego ZoracKy",
+    "email": "diego.zoracky@gmail.com",
+    "homepage": "diegozoracky.com",
+    "twitter": "@diegozoracky"
+  },
+  "licenses": "http://www.opensource.org/licenses/MIT",
+  "keywords": [
+    "google analytics",
+    "event tracking",
+    "universal analytics"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DiegoZoracKy/google-analytics-event-tracking.git"
+  }
+}
