@@ -19,16 +19,16 @@ const dom = new JSDOM(template, {
 
 let outputEvents;
 
-global.ga = function(label, props) {
+global.ga = function (label, props) {
   outputEvents = [label, props];
 };
 global.window = dom.window;
 global.document = dom.window.document;
 
-describe("Google Analitics Event Tracking", function() {
+describe("Google Analitics Event Tracking", function () {
   var GoogleAnalyticsEventTracking;
 
-  before(function() {
+  before(function () {
     GoogleAnalyticsEventTracking =
       new GAMogule({
         trackerName: "zoomlocal",
@@ -49,14 +49,14 @@ describe("Google Analitics Event Tracking", function() {
       }) || window.GoogleAnalyticsEventTracking;
   });
 
-  it("It works", function() {
+  it("It works", function () {
     expect(GoogleAnalyticsEventTracking.debugMode).to.eql(false);
     GoogleAnalyticsEventTracking.setDebugMode(true);
     expect(GoogleAnalyticsEventTracking.debugMode).to.eql(true);
     GoogleAnalyticsEventTracking.setDebugMode(false);
   });
 
-  it("Should get all events registered", function() {
+  it("Should get all events registered", function () {
     expect(GoogleAnalyticsEventTracking.getRegisteredEvents().length).to.eql(1);
     let count = 0;
 
@@ -80,7 +80,7 @@ describe("Google Analitics Event Tracking", function() {
     expect(GoogleAnalyticsEventTracking.getRegisteredEvents().length).to.eql(2);
   });
 
-  it("Should click button - first event", function() {
+  it("Should click button - first event", function () {
     document.querySelector("#mocha .click-me").click();
     expect(outputEvents).to.eql([
       "zoomlocal.send",
@@ -92,7 +92,7 @@ describe("Google Analitics Event Tracking", function() {
       }
     ]);
   });
-  it("Should click button 1 - Catch num of times clicked in button", function() {
+  it("Should click button 1 - Catch num of times clicked in button", function () {
     document.querySelector("#mocha .catch-num").click();
     expect(outputEvents).to.eql([
       "zoomlocal.send",
@@ -104,7 +104,7 @@ describe("Google Analitics Event Tracking", function() {
       }
     ]);
   });
-  it("Should click button 2 - Catch num of times clicked in button", function() {
+  it("Should click button 2 - Catch num of times clicked in button", function () {
     document.querySelector("#mocha .catch-num").click();
     expect(outputEvents).to.eql([
       "zoomlocal.send",

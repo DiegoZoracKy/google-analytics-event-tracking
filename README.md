@@ -1,6 +1,6 @@
 # Google Analytics Event Tracking
 
-**GoogleAnalyticsEventTracking** is a jQuery plugin meant to provide an easy, and lightweight (**.min ~ 1kb**), way to do exactly what its name says.
+**GoogleAnalyticsEventTracking** is a Vanilla JS plugin meant to provide an easy, and lightweight (**.min ~ 1kb**), way to do exactly what its name says.
 
 ## The goal
 
@@ -12,6 +12,8 @@ This is an basic example of how you can setup the plugin:
 
 ```javascript
 GoogleAnalyticsEventTracking({
+  trackerName: 'trackerTestName', // is optional, tracker name event (ex. 'ga("test.send", data)')
+  events: [{
   // 'delegateTo' is optional. Useful for elements created dynamically
   delegateTo: ".root-element-to-handle-event",
   targetSelector: ".something.created .dynamically",
@@ -22,7 +24,8 @@ GoogleAnalyticsEventTracking({
       action: "Event Action",
       label: "Event Label"
     }
-  }
+  }],
+  debugMode: false // is optional
 });
 ```
 
@@ -33,46 +36,48 @@ And here is an example defining multiple elements and events to be tracked, show
 - Express a conditional statement, per event, to send data for google analytics
 
 ```javascript
-GoogleAnalyticsEventTracking(
-  {
-    targetSelector: "#formId",
-    events: {
-      eventType: "submit",
-      gaEventData: {
-        category: "form",
-        action: "submit",
-        label: "Newsletter"
-      },
-      conditional: function() {
-        return $("body").is(".someSpecificLandingPage");
-      }
-    }
-  },
-  {
-    targetSelector: ".target",
-    events: [
-      {
-        eventType: "click",
+GoogleAnalyticsEventTracking({
+  events: [
+    {
+      targetSelector: "#formId",
+      events: {
+        eventType: "submit",
         gaEventData: {
-          category: "Event category",
-          action: "click",
-          label: function($target) {
-            return $target.textContent;
+          category: "form",
+          action: "submit",
+          label: "Newsletter"
+        },
+        conditional: function() {
+          return $("body").is(".someSpecificLandingPage");
+        }
+      }
+    },
+    {
+      targetSelector: ".target",
+      events: [
+        {
+          eventType: "click",
+          gaEventData: {
+            category: "Event category",
+            action: "click",
+            label: function($target) {
+              return $target.textContent;
+            }
+          }
+        },
+        {
+          eventType: "mouseenter",
+          gaEventData: {
+            category: "Event category",
+            action: "open",
+            label: "Event Label",
+            nonInteraction: 1
           }
         }
-      },
-      {
-        eventType: "mouseenter",
-        gaEventData: {
-          category: "Event category",
-          action: "open",
-          label: "Event Label",
-          nonInteraction: 1
-        }
-      }
-    ]
-  }
-);
+      ]
+    }
+  ]
+});
 ```
 
 Properties of **gaEventData** can be the real Google Analytics event data names ('eventCategory', 'eventAction', 'eventLabel', 'eventValue', 'nonInteraction')
