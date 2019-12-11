@@ -31,17 +31,14 @@
   "use strict";
 
   class GoogleAnalyticsEventTracking {
-    debugMode;
-    registeredEvents = [];
-    gaEventDataTranslations = {
-      category: "eventCategory",
-      action: "eventAction",
-      label: "eventLabel",
-      value: "eventValue"
-    };
-    ga = undefined;
-
     constructor({ trackerName, events = [], debugMode = false }) {
+      this.registeredEvents = [];
+      this.gaEventDataTranslations = {
+        category: "eventCategory",
+        action: "eventAction",
+        label: "eventLabel",
+        value: "eventValue"
+      };
       this.ga = ga;
       this.debugMode = debugMode;
 
