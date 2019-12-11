@@ -1,0 +1,37 @@
+{
+  "name": "google-analytics-event-tracking",
+  "version": "2.0.0",
+  "description": "**GoogleAnalyticsEventTracking** is a Vanilla JS plugin meant to provide an easy, and lightweight (**.min ~ 1kb**), way to do exactly what its name says.",
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha",
+    "precommit": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DiegoZoracKy/google-analytics-event-tracking.git"
+  },
+  "keywords": [
+    "google analytics",
+    "event tracking",
+    "universal analytics"
+  ],
+  "author": "diego.zoracky@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DiegoZoracKy/google-analytics-event-tracking/issues"
+  },
+  "homepage": "https://github.com/DiegoZoracKy/google-analytics-event-tracking#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "husky": "^4.0.0-beta.5",
+    "jsdom": "^15.2.1",
+    "mocha": "^6.2.2",
+    "mocha-jsdom": "^2.0.0"
+  },
+  "husty": {
+    "hooks": {
+      "pre-commit": "npm run test"
+    }
+  }
+}
